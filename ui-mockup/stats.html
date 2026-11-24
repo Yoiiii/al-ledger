@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>统计 · 小账房</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+  .num{font-variant-numeric:tabular-nums}
+  .glass{background:rgba(255,255,255,.06);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1)}
+  .gtext{background:linear-gradient(90deg,#818CF8,#C084FC,#22D3EE);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .orb{position:fixed;border-radius:9999px;filter:blur(90px);pointer-events:none;z-index:0}
+  .glow-ico{filter:drop-shadow(0 0 8px rgba(129,140,248,.9))}
+</style>
+</head>
+<body class="bg-[#0B0D17] text-slate-100 antialiased">
+
+  <!-- 背景光斑 -->
+  <div class="orb -top-24 left-1/4 w-80 h-80 bg-indigo-600/25"></div>
+  <div class="orb bottom-0 -right-20 w-72 h-72 bg-cyan-500/10"></div>
+
+  <div class="relative z-10 max-w-[480px] mx-auto min-h-screen border-x border-white/5 pb-28">
+
+    <!-- 顶栏 -->
+    <header class="sticky top-0 z-20 backdrop-blur-xl bg-[#0B0D17]/70 border-b border-white/5 px-4 py-3 flex items-center gap-2">
+      <i data-lucide="pie-chart" class="w-5 h-5 text-indigo-300"></i>
+      <h1 class="text-[17px] font-bold">统计</h1>
+    </header>
+
+    <div class="px-3 pt-4 space-y-3.5">
+
+      <!-- 周期切换 -->
+      <div class="glass rounded-xl p-1 flex">
+        <button class="flex-1 py-2 rounded-lg text-[13px] text-slate-400 hover:text-slate-200 transition">本周</button>
+        <button class="flex-1 py-2 rounded-lg text-[13px] font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/30">本月</button>
+        <button class="flex-1 py-2 rounded-lg text-[13px] text-slate-400 hover:text-slate-200 transition">自定义</button>
+      </div>
+
+      <!-- 三张数字卡 -->
+      <div class="grid grid-cols-3 gap-2.5">
+        <div class="glass rounded-2xl p-3 text-center relative overflow-hidden">
+          <div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-rose-500/20 blur-2xl"></div>
+          <div class="flex items-center justify-center gap-1 text-[11px] text-slate-400"><i data-lucide="trending-down" class="w-3.5 h-3.5 text-rose-400"></i>总支出</div>
+          <div class="text-[16px] font-extrabold num text-rose-400 mt-1.5">¥3,286.50</div>
+        </div>
+        <div class="glass rounded-2xl p-3 text-center relative overflow-hidden">
+          <div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-emerald-500/20 blur-2xl"></div>
+          <div class="flex items-center justify-center gap-1 text-[11px] text-slate-400"><i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i>总收入</div>
+          <div class="text-[16px] font-extrabold num text-emerald-400 mt-1.5">¥200.00</div>
+        </div>
+        <div class="glass rounded-2xl p-3 text-center relative overflow-hidden">
+          <div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-indigo-500/20 blur-2xl"></div>
+          <div class="flex items-center justify-center gap-1 text-[11px] text-slate-400"><i data-lucide="hash" class="w-3.5 h-3.5 text-indigo-300"></i>笔数</div>
+          <div class="text-[16px] font-extrabold num gtext mt-1.5">18 笔</div>
+        </div>
+      </div>
+
+      <!-- 分类占比：环形图 -->
+      <section class="glass rounded-2xl p-4">
+        <h2 class="text-[14px] font-bold mb-4 flex items-center gap-2">
+          <i data-lucide="chart-pie" class="w-4 h-4 text-indigo-300"></i>分类占比（支出）
+        </h2>
+        <div class="flex items-center gap-4">
+          <div class="relative w-[130px] h-[130px] rounded-full flex-none shadow-[0_0_30px_rgba(99,102,241,.35)]"
+               style="background:conic-gradient(#FB923C 0 39%,#60A5FA 39% 65%,#A78BFA 65% 80%,#22D3EE 80% 90%,#94A3B8 90% 100%)">
+            <div class="absolute inset-[20px] rounded-full bg-[#111528] border border-white/10"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="text-[10px] text-slate-400">本月支出</span>
+              <span class="text-[15px] font-extrabold num">¥3,286</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 space-y-2.5">
+            <div class="flex items-center gap-2 text-[12px]">
+              <span class="w-2.5 h-2.5 rounded-[4px] bg-orange-400 flex-none shadow-[0_0_6px_rgba(251,146,60,.8)]"></span>
+              <span class="flex-1 truncate">餐饮</span><span class="num font-semibold">¥1,286</span><span class="text-slate-500 num w-9 text-right">39%</span>
+            </div>
+            <div class="flex items-center gap-2 text-[12px]">
+              <span class="w-2.5 h-2.5 rounded-[4px] bg-blue-400 flex-none"></span>
+              <span class="flex-1 truncate">交通</span><span class="num font-semibold">¥856</span><span class="text-slate-500 num w-9 text-right">26%</span>
+            </div>
+            <div class="flex items-center gap-2 text-[12px]">
+              <span class="w-2.5 h-2.5 rounded-[4px] bg-violet-400 flex-none"></span>
+              <span class="flex-1 truncate">购物</span><span class="num font-semibold">¥493</span><span class="text-slate-500 num w-9 text-right">15%</span>
+            </div>
+            <div class="flex items-center gap-2 text-[12px]">
+              <span class="w-2.5 h-2.5 rounded-[4px] bg-cyan-400 flex-none"></span>
+              <span class="flex-1 truncate">居住</span><span class="num font-semibold">¥329</span><span class="text-slate-500 num w-9 text-right">10%</span>
+            </div>
+            <div class="flex items-center gap-2 text-[12px]">
+              <span class="w-2.5 h-2.5 rounded-[4px] bg-slate-400 flex-none"></span>
+              <span class="flex-1 truncate">其他</span><span class="num font-semibold">¥323</span><span class="text-slate-500 num w-9 text-right">10%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 每日趋势：柱状图 -->
+      <section class="glass rounded-2xl p-4">
+        <h2 class="text-[14px] font-bold mb-2 flex items-center gap-2">
+          <i data-lucide="activity" class="w-4 h-4 text-indigo-300"></i>每日趋势（近 7 天）
+        </h2>
+        <div class="flex items-end justify-between h-[140px] pt-4">
+          <div class="flex-1 flex flex-col items-center gap-1.5">
+            <span class="text-[9px] text-slate-500 num">86</span>
+            <div class="w-5 rounded-t-md bg-gradient-to-t from-indigo-500/40 to-indigo-400/80" style="height:34px"></div>
+            <span class="text-[10px] text-slate-500">周四</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5">
+            <span class="text-[9px] text-slate-500 num">142</span>
+            <div class="w-5 rounded-t-md bg-gradient-to-t from-indigo-500/40 to-indigo-400/80" style="height:56px"></div>
+            <span class="text-[10px] text-slate-500">周五</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5">
+            <span class="text-[9px] text-slate-500 num">210</span>
+            <div class="w-5 rounded-t-md bg-gradient-to-t from-violet-500/40 to-violet-400/90" style="height:82px"></div>
+            <span class="text-[10px] text-slate-500">周六</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5">
+            <span class="text-[9px] text-slate-500 num">98</span>
+            <div class="w-5 rounded-t-md bg-gradient-to-t from-indigo-500/40 to-indigo-400/80" style="height:38px"></div>
+            <span class="text-[10px] text-slate-500">周日</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5">
+            <span class="text-[9px] text-slate-500 num">173</span>
+            <div class="w-5 rounded-t-md bg-gradient-to-t from-indigo-500/40 to-indigo-400/80" style="height:68px"></div>
+            <span class="text-[10px] text-slate-500">周一</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5">
+            <span class="text-[9px] text-slate-500 num">226</span>
+            <div class="w-5 rounded-t-md bg-gradient-to-t from-violet-500/40 to-fuchsia-400/90 shadow-[0_0_12px_rgba(192,132,252,.5)]" style="height:88px"></div>
+            <span class="text-[10px] text-slate-500">周二</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5">
+            <span class="text-[9px] text-indigo-300 font-bold num">103</span>
+            <div class="w-5 rounded-t-md bg-gradient-to-t from-indigo-500 to-cyan-400 shadow-[0_0_14px_rgba(34,211,238,.6)]" style="height:40px"></div>
+            <span class="text-[10px] text-indigo-300 font-bold">今天</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 分类排行 -->
+      <section class="glass rounded-2xl p-4">
+        <h2 class="text-[14px] font-bold mb-2 flex items-center gap-2">
+          <i data-lucide="list-ordered" class="w-4 h-4 text-indigo-300"></i>分类排行
+        </h2>
+        <div class="flex items-center gap-3 py-2.5">
+          <span class="w-5 text-center text-[12px] font-extrabold text-amber-300">1</span>
+          <div class="w-8 h-8 rounded-lg bg-orange-500/15 flex items-center justify-center flex-none"><i data-lucide="utensils" class="w-4 h-4 text-orange-300"></i></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[13px] font-semibold">餐饮</div>
+            <div class="h-1 rounded-full bg-white/10 mt-1.5 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-orange-400 to-amber-400" style="width:100%"></div></div>
+          </div>
+          <div class="text-right flex-none">
+            <div class="text-[13px] font-bold num">¥1,286.40</div>
+            <div class="text-[10px] text-slate-500 num">39%</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 py-2.5 border-t border-white/5">
+          <span class="w-5 text-center text-[12px] font-extrabold text-slate-400">2</span>
+          <div class="w-8 h-8 rounded-lg bg-blue-500/15 flex items-center justify-center flex-none"><i data-lucide="car-front" class="w-4 h-4 text-blue-300"></i></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[13px] font-semibold">交通</div>
+            <div class="h-1 rounded-full bg-white/10 mt-1.5 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-blue-400 to-cyan-400" style="width:67%"></div></div>
+          </div>
+          <div class="text-right flex-none">
+            <div class="text-[13px] font-bold num">¥856.00</div>
+            <div class="text-[10px] text-slate-500 num">26%</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 py-2.5 border-t border-white/5">
+          <span class="w-5 text-center text-[12px] font-extrabold text-slate-500">3</span>
+          <div class="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center flex-none"><i data-lucide="shopping-bag" class="w-4 h-4 text-violet-300"></i></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[13px] font-semibold">购物</div>
+            <div class="h-1 rounded-full bg-white/10 mt-1.5 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-violet-400 to-purple-400" style="width:38%"></div></div>
+          </div>
+          <div class="text-right flex-none">
+            <div class="text-[13px] font-bold num">¥492.90</div>
+            <div class="text-[10px] text-slate-500 num">15%</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 py-2.5 border-t border-white/5">
+          <span class="w-5 text-center text-[12px] font-extrabold text-slate-600">4</span>
+          <div class="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center flex-none"><i data-lucide="home" class="w-4 h-4 text-cyan-300"></i></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[13px] font-semibold">居住</div>
+            <div class="h-1 rounded-full bg-white/10 mt-1.5 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-teal-400" style="width:26%"></div></div>
+          </div>
+          <div class="text-right flex-none">
+            <div class="text-[13px] font-bold num">¥328.60</div>
+            <div class="text-[10px] text-slate-500 num">10%</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 py-2.5 border-t border-white/5">
+          <span class="w-5 text-center text-[12px] font-extrabold text-slate-600">5</span>
+          <div class="w-8 h-8 rounded-lg bg-slate-500/15 flex items-center justify-center flex-none"><i data-lucide="package" class="w-4 h-4 text-slate-300"></i></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[13px] font-semibold">其他</div>
+            <div class="h-1 rounded-full bg-white/10 mt-1.5 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-slate-400 to-slate-500" style="width:25%"></div></div>
+          </div>
+          <div class="text-right flex-none">
+            <div class="text-[13px] font-bold num">¥322.60</div>
+            <div class="text-[10px] text-slate-500 num">10%</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 底部 Tab -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-16 z-30 backdrop-blur-xl bg-[#0B0D17]/80 border-t border-white/5 flex">
+      <a class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-slate-300 transition" href="chat.html">
+        <i data-lucide="message-circle" class="w-5 h-5"></i><span class="text-[10px]">记账</span>
+      </a>
+      <a class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-slate-300 transition" href="bills.html">
+        <i data-lucide="receipt" class="w-5 h-5"></i><span class="text-[10px]">账单</span>
+      </a>
+      <a class="flex-1 flex flex-col items-center justify-center gap-1 text-indigo-300 font-semibold" href="stats.html">
+        <i data-lucide="pie-chart" class="w-5 h-5 glow-ico"></i><span class="text-[10px]">统计</span>
+      </a>
+    </nav>
+
+  </div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

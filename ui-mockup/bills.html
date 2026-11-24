@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>账单 · 小账房</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+  .num{font-variant-numeric:tabular-nums}
+  .glass{background:rgba(255,255,255,.06);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1)}
+  .gtext{background:linear-gradient(90deg,#818CF8,#C084FC,#22D3EE);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .orb{position:fixed;border-radius:9999px;filter:blur(90px);pointer-events:none;z-index:0}
+  .glow-ico{filter:drop-shadow(0 0 8px rgba(129,140,248,.9))}
+</style>
+</head>
+<body class="bg-[#0B0D17] text-slate-100 antialiased">
+
+  <!-- 背景光斑 -->
+  <div class="orb -top-20 -right-20 w-72 h-72 bg-violet-600/25"></div>
+  <div class="orb bottom-1/4 -left-24 w-80 h-80 bg-indigo-600/15"></div>
+
+  <div class="relative z-10 max-w-[480px] mx-auto min-h-screen border-x border-white/5 pb-28">
+
+    <!-- 顶栏 + 筛选 -->
+    <header class="sticky top-0 z-20 backdrop-blur-xl bg-[#0B0D17]/70 border-b border-white/5 px-4 py-3">
+      <div class="flex items-center justify-between">
+        <h1 class="text-[17px] font-bold flex items-center gap-2">
+          <i data-lucide="receipt" class="w-5 h-5 text-indigo-300"></i>账单
+        </h1>
+        <button class="glass rounded-full p-2 active:scale-95 transition">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-slate-300"></i>
+        </button>
+      </div>
+      <div class="flex gap-2 mt-3">
+        <button class="flex-1 h-8 glass rounded-lg px-3 flex items-center justify-between text-[12px] text-slate-300 active:scale-[.98] transition">
+          全部分类 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
+        </button>
+        <button class="flex-1 h-8 glass rounded-lg px-3 flex items-center justify-between text-[12px] text-slate-300 active:scale-[.98] transition">
+          10月1日 - 10月14日 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- 月份汇总条 -->
+    <div class="mx-3 mt-3 glass rounded-2xl px-4 py-3 flex items-center justify-between text-[12px] text-slate-400">
+      <div class="flex items-center gap-1.5"><i data-lucide="trending-down" class="w-3.5 h-3.5 text-rose-400"></i>支出 <span class="num font-bold text-[14px] text-rose-400">¥3,286.50</span></div>
+      <div class="flex items-center gap-1.5"><i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i>收入 <span class="num font-bold text-[14px] text-emerald-400">¥200.00</span></div>
+      <div>共 <span class="num font-bold text-[14px] text-slate-200">18</span> 笔</div>
+    </div>
+
+    <!-- 今天 -->
+    <section class="mx-3 mt-3 glass rounded-2xl overflow-hidden">
+      <div class="flex justify-between items-baseline px-4 pt-3 pb-2 border-b border-white/5">
+        <span class="text-[13px] font-bold flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400 shadow-[0_0_6px_rgba(129,140,248,.9)]"></span>今天</span>
+        <span class="text-[11px] text-slate-500 num">小计 -¥103.00</span>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 active:bg-white/10 transition cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500/80 to-amber-500/80 flex items-center justify-center shadow-md shadow-orange-500/20 flex-none">
+          <i data-lucide="utensils" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[14px] truncate">午饭</div>
+          <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1"><i data-lucide="message-circle" class="w-3 h-3"></i>微信 · 12:30</div>
+        </div>
+        <div class="text-[15px] font-bold num text-rose-400">-¥45.00</div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600 flex-none"></i>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3 border-t border-white/5 hover:bg-white/5 active:bg-white/10 transition cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500/80 to-cyan-500/80 flex items-center justify-center shadow-md shadow-blue-500/20 flex-none">
+          <i data-lucide="car-front" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[14px] truncate">打车去机场</div>
+          <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1"><i data-lucide="credit-card" class="w-3 h-3"></i>银行卡 · 09:10</div>
+        </div>
+        <div class="text-[15px] font-bold num text-rose-400">-¥58.00</div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600 flex-none"></i>
+      </div>
+    </section>
+
+    <!-- 昨天 -->
+    <section class="mx-3 mt-3 glass rounded-2xl overflow-hidden">
+      <div class="flex justify-between items-baseline px-4 pt-3 pb-2 border-b border-white/5">
+        <span class="text-[13px] font-bold flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>昨天</span>
+        <span class="text-[11px] text-slate-500 num">小计 -¥173.00</span>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 active:bg-white/10 transition cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500/80 to-purple-500/80 flex items-center justify-center shadow-md shadow-violet-500/20 flex-none">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[14px] truncate">超市采购</div>
+          <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1"><i data-lucide="wallet" class="w-3 h-3"></i>支付宝 · 18:42</div>
+        </div>
+        <div class="text-[15px] font-bold num text-rose-400">-¥128.00</div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600 flex-none"></i>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3 border-t border-white/5 hover:bg-white/5 active:bg-white/10 transition cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-yellow-500/80 to-orange-500/80 flex items-center justify-center shadow-md shadow-yellow-500/20 flex-none">
+          <i data-lucide="book-open" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[14px] truncate">买书</div>
+          <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1"><i data-lucide="message-circle" class="w-3 h-3"></i>微信 · 15:20</div>
+        </div>
+        <div class="text-[15px] font-bold num text-rose-400">-¥45.00</div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600 flex-none"></i>
+      </div>
+    </section>
+
+    <!-- 10月5日 -->
+    <section class="mx-3 mt-3 glass rounded-2xl overflow-hidden">
+      <div class="flex justify-between items-baseline px-4 pt-3 pb-2 border-b border-white/5">
+        <span class="text-[13px] font-bold flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>10月5日</span>
+        <span class="text-[11px] text-slate-500 num">小计 +¥69.50</span>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 active:bg-white/10 transition cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-pink-500/80 to-rose-500/80 flex items-center justify-center shadow-md shadow-pink-500/20 flex-none">
+          <i data-lucide="gamepad-2" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[14px] truncate">游戏充值</div>
+          <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1"><i data-lucide="message-circle" class="w-3 h-3"></i>微信 · 21:03</div>
+        </div>
+        <div class="text-[15px] font-bold num text-rose-400">-¥98.00</div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600 flex-none"></i>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3 border-t border-white/5 hover:bg-white/5 active:bg-white/10 transition cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-red-500/80 to-rose-500/80 flex items-center justify-center shadow-md shadow-red-500/20 flex-none">
+          <i data-lucide="pill" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[14px] truncate">感冒药</div>
+          <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1"><i data-lucide="banknote" class="w-3 h-3"></i>现金 · 11:26</div>
+        </div>
+        <div class="text-[15px] font-bold num text-rose-400">-¥32.50</div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600 flex-none"></i>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3 border-t border-white/5 hover:bg-white/5 active:bg-white/10 transition cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500/80 to-teal-500/80 flex items-center justify-center shadow-md shadow-emerald-500/20 flex-none">
+          <i data-lucide="gift" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[14px] truncate">红包</div>
+          <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1"><i data-lucide="message-circle" class="w-3 h-3"></i>微信 · 10:00</div>
+        </div>
+        <div class="text-[15px] font-bold num text-emerald-400">+¥200.00</div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600 flex-none"></i>
+      </div>
+    </section>
+
+    <p class="text-center text-[11px] text-slate-600 mt-4">点击任意一行 → 打开底部编辑抽屉</p>
+
+    <!-- 遮罩 -->
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-30"></div>
+
+    <!-- 编辑抽屉（演示态：默认展开） -->
+    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-40 rounded-t-3xl bg-[#111528]/95 backdrop-blur-2xl border-t border-x border-white/10 shadow-[0_-8px_40px_rgba(0,0,0,.6)] px-4 pt-2 pb-6 max-h-[82vh] overflow-y-auto">
+      <div class="w-9 h-1 rounded-full bg-white/20 mx-auto mb-3"></div>
+      <h2 class="text-[15px] font-bold mb-4 flex items-center gap-2">
+        <i data-lucide="pencil" class="w-4 h-4 text-indigo-300"></i>编辑账单
+      </h2>
+
+      <div class="mb-4">
+        <label class="block text-[12px] text-slate-400 mb-1.5">金额</label>
+        <div class="flex items-center gap-2 glass rounded-xl px-4 h-12">
+          <span class="text-[18px] font-bold text-slate-400">¥</span>
+          <input type="text" value="45.00" class="flex-1 bg-transparent outline-none text-[20px] font-extrabold num text-rose-400">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-[12px] text-slate-400 mb-1.5">分类</label>
+        <div class="grid grid-cols-5 gap-2">
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl bg-indigo-500/15 border border-indigo-400/50 text-indigo-300">
+            <i data-lucide="utensils" class="w-5 h-5"></i><span class="text-[10px] font-semibold">餐饮</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="car-front" class="w-5 h-5"></i><span class="text-[10px]">交通</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i><span class="text-[10px]">购物</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="home" class="w-5 h-5"></i><span class="text-[10px]">居住</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="gamepad-2" class="w-5 h-5"></i><span class="text-[10px]">娱乐</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="pill" class="w-5 h-5"></i><span class="text-[10px]">医疗</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="book-open" class="w-5 h-5"></i><span class="text-[10px]">教育</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="smartphone" class="w-5 h-5"></i><span class="text-[10px]">通讯</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="gift" class="w-5 h-5"></i><span class="text-[10px]">人情</span>
+          </button>
+          <button class="flex flex-col items-center gap-1 py-2 rounded-xl border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="package" class="w-5 h-5"></i><span class="text-[10px]">其他</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-[12px] text-slate-400 mb-1.5">支付方式</label>
+        <div class="flex flex-wrap gap-2">
+          <button class="inline-flex items-center gap-1.5 text-[12px] px-3.5 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/50 text-indigo-300 font-semibold">
+            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>微信
+          </button>
+          <button class="inline-flex items-center gap-1.5 text-[12px] px-3.5 py-1.5 rounded-full border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="wallet" class="w-3.5 h-3.5"></i>支付宝
+          </button>
+          <button class="inline-flex items-center gap-1.5 text-[12px] px-3.5 py-1.5 rounded-full border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="credit-card" class="w-3.5 h-3.5"></i>银行卡
+          </button>
+          <button class="inline-flex items-center gap-1.5 text-[12px] px-3.5 py-1.5 rounded-full border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="banknote" class="w-3.5 h-3.5"></i>现金
+          </button>
+          <button class="inline-flex items-center gap-1.5 text-[12px] px-3.5 py-1.5 rounded-full border border-white/10 text-slate-400 hover:bg-white/5 transition">
+            <i data-lucide="more-horizontal" class="w-3.5 h-3.5"></i>其他
+          </button>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-[12px] text-slate-400 mb-1.5">日期</label>
+        <div class="flex items-center gap-2 glass rounded-xl px-4 h-11">
+          <i data-lucide="calendar-days" class="w-4 h-4 text-slate-400 flex-none"></i>
+          <input type="date" value="2026-10-14" class="flex-1 bg-transparent outline-none text-[14px] text-slate-200 [color-scheme:dark]">
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label class="block text-[12px] text-slate-400 mb-1.5">备注</label>
+        <div class="flex items-center gap-2 glass rounded-xl px-4 h-11">
+          <input type="text" value="午饭" class="flex-1 bg-transparent outline-none text-[14px] text-slate-200">
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button class="flex-none w-[88px] h-11 rounded-xl inline-flex items-center justify-center gap-1.5 text-[14px] font-semibold text-rose-300 bg-rose-500/10 border border-rose-400/40 hover:bg-rose-500/20 active:scale-95 transition">
+          <i data-lucide="trash-2" class="w-4 h-4"></i>删除
+        </button>
+        <button class="flex-1 h-11 rounded-xl text-[14px] font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/40 hover:opacity-90 active:scale-95 transition">
+          保存
+        </button>
+      </div>
+    </div>
+
+    <!-- 底部 Tab -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-16 z-50 backdrop-blur-xl bg-[#0B0D17]/80 border-t border-white/5 flex">
+      <a class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-slate-300 transition" href="chat.html">
+        <i data-lucide="message-circle" class="w-5 h-5"></i><span class="text-[10px]">记账</span>
+      </a>
+      <a class="flex-1 flex flex-col items-center justify-center gap-1 text-indigo-300 font-semibold" href="bills.html">
+        <i data-lucide="receipt" class="w-5 h-5 glow-ico"></i><span class="text-[10px]">账单</span>
+      </a>
+      <a class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-slate-300 transition" href="stats.html">
+        <i data-lucide="pie-chart" class="w-5 h-5"></i><span class="text-[10px]">统计</span>
+      </a>
+    </nav>
+
+  </div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

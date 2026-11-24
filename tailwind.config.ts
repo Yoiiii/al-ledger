@@ -59,5 +59,7 @@ export default {
       },
     },
   },
+  // tailwindcss-animate 仅提供 CommonJS 入口，此处保留 require
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

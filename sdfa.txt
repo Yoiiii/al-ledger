@@ -1,0 +1,35 @@
+ai-ledger/
+├── app/                  # ★ 核心：页面(前端) + API路由(后端) 都在这里
+│   ├── page.tsx          #   首页：AI 对话记账（客户端组件）
+│   ├── layout.tsx        #   全局布局 + 字体 + 全局 CSS
+│   ├── globals.css       #   Tailwind 全局样式 + 玻璃拟态等自定义类
+│   ├── bills/            #   账单页（前端）
+│   ├── stats/            #   统计页（前端）
+│   ├── profile/          #   个人资料页（前端）
+│   ├── auth/             #   登录/注册/找回密码/确认回调等（前端 + 1个后端回调）
+│   ├── api/              #   ★ 后端 API（服务端 Route Handlers）
+│   │   ├── chat/         #     对话接口：接大模型 + 工具调用
+│   │   ├── transactions/ #     账单 CRUD 接口
+│   │   └── stats/        #     统计数据接口
+│   └── protected/        #   ⚠ 空目录残留（已删文件，可清理）
+├── components/           # 可复用 UI 组件（前端）
+│   ├── bottom-nav.tsx    #   底部导航
+│   ├── login-form.tsx / sign-up-form.tsx / ...  # 鉴权表单
+│   ├── ui/               #   shadcn 风格基础组件（button 等）
+│   └── tutorial/         #   ⚠ 脚手架残留（未使用）
+├── lib/                  # ★ 业务逻辑与数据访问层（多为服务端）
+│   ├── transactions.ts   #   账单数据访问（CRUD + 统计），直接查库
+│   ├── tools.ts          #   AI 工具定义（add/list/update/delete/query_stats）
+│   ├── supabase/         #   Supabase 客户端封装
+│   │   ├── server.ts     #     服务端客户端（Route Handler / Server Component 用）
+│   │   ├── client.ts     #     浏览器端客户端（纯前端交互用）
+│   │   └── proxy.ts      #     会话刷新 + 登录守卫逻辑
+│   └── utils.ts          #   通用工具（cn、hasEnvVars 等）
+├── supabase/
+│   └── migrations/0001_init.sql  # ★ 建表 SQL（需在 Supabase 执行）
+├── proxy.ts              # ★ Next 16 中间件（会话守卫/重定向）
+├── next.config.ts        #   开启 cacheComponents
+├── tailwind.config.ts / postcss.config.mjs
+├── .env.local            #   环境变量（Supabase URL/Key + DeepSeek Key）★含密钥
+├── doc/                  #   需求文档
+└── ui-mockup/            #   UI 原型/设计稿
